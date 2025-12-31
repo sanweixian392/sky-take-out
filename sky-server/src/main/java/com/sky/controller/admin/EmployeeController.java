@@ -1,9 +1,11 @@
 package com.sky.controller.admin;
 
 import com.sky.constant.JwtClaimsConstant;
+import com.sky.context.BaseContext;
 import com.sky.dto.EmployeeDTO;
 import com.sky.dto.EmployeeLoginDTO;
 import com.sky.dto.EmployeePageQueryDTO;
+import com.sky.dto.PasswordEditDTO;
 import com.sky.entity.Employee;
 import com.sky.properties.JwtProperties;
 import com.sky.result.PageResult;
@@ -72,8 +74,10 @@ public class EmployeeController {
     }
     
     
-    /*
+    /**
     分页查询员工
+     * @param employeePageQueryDTO
+     * @return
      */
     @GetMapping("/page")
     @ApiOperation("分页查询员工")
@@ -83,8 +87,59 @@ public class EmployeeController {
         return Result.success(pageResult);
     }
 
+    /**
+     *
+     * @param passwordEditDTO
+     * @return
+     */
+    @PutMapping("/editPassword")
+    @ApiOperation("修改密码")
+    public Result<PasswordEditDTO> passwordEdit(@RequestBody PasswordEditDTO passwordEditDTO){
+        //从BaseContext获取当前登录员工ID
+        Long empId = BaseContext.getCurrentId();
+        passwordEditDTO.setEmpId(empId);
+
+        log.info("将密码修改为:{}",passwordEditDTO);
+        employeeService.passwordEdit(passwordEditDTO);
+        return Result.success();
+    }
 
 
+    @PutMapping
+    @ApiOperation("编辑员工信息")
+    public Result<EmployeeDTO> update(@RequestBody EmployeeDTO employeeDTO){
+        log.info("编辑员工信息为：{}",employeeDTO);
+
+        employeeService.update(employeeDTO);
+
+        return Result.success();
+    }
+
+
+    /**
+     *
+     * @param employee
+     * @return
+     */
+    @PostMapping("/status/{status}")
+    @ApiOperation("启用，禁用员工账号")
+    public Result<Employee> employeeStatus(Employee employee){
+        log.info("员工状态设置为：{}",employee);
+
+        employeeService.employeeStatus(employee);
+        return Result.success();
+    }
+
+    /**
+     *
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询员工")
+    public Result<Employee> queryById(@PathVariable Long id){
+        log.info("查询id查询员工：{}",id);
+        Employee emp = employeeService.queryById(id);
+        return Result.success(emp);
+    }
 
     /**
      * 退出
