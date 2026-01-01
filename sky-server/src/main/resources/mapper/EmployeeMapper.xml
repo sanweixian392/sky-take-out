@@ -2,45 +2,49 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.EmployeeMapper">
+
     <update id="passwordEdit">
         UPDATE employee
         SET password = #{newPassword}
         WHERE id = #{empId}
     </update>
+
     <update id="update">
         update employee
         <set>
-            <if test="name != null">name = #{name}</if>
-            <if test="phone != null">phone = #{phone}</if>
-            <if test="sex != null">sex = #{sex}</if>
-            <if test="username != null">username = #{username}</if>
-            <if test="id_number != null">id_number = #{idNumber}</if>
-            <if test="password != null">password = #{password}</if>
-            <if test="updateTime != null">updateTime = #{updateTime}</if>
-            <if test="uodateUser != null">updateUser = #{uodateUser}</if>
-            <if test="status != null">status = #{status}</if>
+            <if test="name != null">name = #{name},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="username != null">username = #{username},</if>
+            <if test="idNumber != null">id_number = #{idNumber},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="updateUser != null">update_user = #{updateUser},</if>
+            <if test="status != null">status = #{status},</if>
         </set>
         where id = #{id}
     </update>
+
     <update id="employeeStatus">
         update employee
         set status = #{status}
         where id = #{id}
     </update>
+
     <select id="pageQuery" resultType="com.sky.entity.Employee">
         select * from employee
         <where>
             <if test="name != null and name != ''">
-        and name like concat('%',#{name},'%')
-        </if>
+                and name like concat('%',#{name},'%')
+            </if>
         </where>
         order by create_time desc
     </select>
+
     <select id="queryById" resultType="com.sky.entity.Employee">
-        <if test="id != null or id != ''">
-            select * from employee
-            where id = #{id}
-        </if>
+        select * from employee
+        where id = #{id}
     </select>
+
 
 </mapper>

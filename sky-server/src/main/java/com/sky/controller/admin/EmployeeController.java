@@ -64,7 +64,11 @@ public class EmployeeController {
         return Result.success(employeeLoginVO);
     }
 
-
+    /**
+     * 新增员工
+     * @param employeeDTO
+     * @return
+     */
     @PostMapping
     @ApiOperation("新增员工")
     public Result<EmployeeDTO> save(@RequestBody EmployeeDTO employeeDTO){
@@ -88,7 +92,7 @@ public class EmployeeController {
     }
 
     /**
-     *
+     *修改密码
      * @param passwordEditDTO
      * @return
      */
@@ -104,20 +108,24 @@ public class EmployeeController {
         return Result.success();
     }
 
-
+    /**
+     * 编辑员工信息
+     * @param employeeDTO
+     * @return
+     */
     @PutMapping
     @ApiOperation("编辑员工信息")
-    public Result<Employee> update(@RequestBody Employee employee){
-        log.info("编辑员工信息为：{}",employee);
+    public Result<Employee> update(@RequestBody EmployeeDTO employeeDTO){
+        log.info("编辑员工信息为：{}",employeeDTO);
 
-        employeeService.update(employee);
+        employeeService.update(employeeDTO);
 
         return Result.success();
     }
 
 
     /**
-     *
+     *启用，禁用员工账号
      * @param id
      * @param status
      * @return
@@ -132,7 +140,9 @@ public class EmployeeController {
     }
 
     /**
-     *
+     * 根据id查询员工
+     * @param id
+     * @return
      */
     @GetMapping("/{id}")
     @ApiOperation("根据id查询员工")

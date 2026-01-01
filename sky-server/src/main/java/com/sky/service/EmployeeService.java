@@ -40,7 +40,7 @@ public interface EmployeeService {
      *
      * @param employee
      */
-    void update(Employee employee);
+    void update(EmployeeDTO employeeDTO);
 
     /**
      *
