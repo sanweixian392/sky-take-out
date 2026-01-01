@@ -38,15 +38,16 @@ public interface EmployeeService {
 
     /**
      *
-     * @param employeeDTO
+     * @param employee
      */
-    void update(EmployeeDTO employeeDTO);
+    void update(Employee employee);
 
     /**
      *
-     * @param employee
+     * @param id
+     * @param status
      */
-    void employeeStatus(Employee employee);
+    void employeeStatus(Long id,Integer status);
 
 
     Employee queryById(Long id);

@@ -116,19 +116,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     /**
      *
-     * @param employeeDTO
+     * @param employee
      */
     @Override
-    public void update(EmployeeDTO employeeDTO) {
-        employeeMapper.update(employeeDTO);
+    public void update(Employee employee) {
+
+        employeeMapper.update(employee);
     }
 
     /**
      *
-     * @param employee
+     * @param id
+     * @param status
      */
     @Override
-    public void employeeStatus(Employee employee) {
+    public void employeeStatus(Long id,Integer status)
+    {
+        Employee employee = Employee.builder()
+                .status(status)
+                .id(id)
+                .build();
         employeeMapper.employeeStatus(employee);
     }
 

@@ -107,10 +107,10 @@ public class EmployeeController {
 
     @PutMapping
     @ApiOperation("编辑员工信息")
-    public Result<EmployeeDTO> update(@RequestBody EmployeeDTO employeeDTO){
-        log.info("编辑员工信息为：{}",employeeDTO);
+    public Result<Employee> update(@RequestBody Employee employee){
+        log.info("编辑员工信息为：{}",employee);
 
-        employeeService.update(employeeDTO);
+        employeeService.update(employee);
 
         return Result.success();
     }
@@ -118,15 +118,16 @@ public class EmployeeController {
 
     /**
      *
-     * @param employee
+     * @param id
+     * @param status
      * @return
      */
     @PostMapping("/status/{status}")
     @ApiOperation("启用，禁用员工账号")
-    public Result<Employee> employeeStatus(Employee employee){
-        log.info("员工状态设置为：{}",employee);
+    public Result<Employee> employeeStatus(Long id,@PathVariable Integer status){
+        log.info("员工状态设置为：{},{}",id,status);
 
-        employeeService.employeeStatus(employee);
+        employeeService.employeeStatus(id,status);
         return Result.success();
     }
 

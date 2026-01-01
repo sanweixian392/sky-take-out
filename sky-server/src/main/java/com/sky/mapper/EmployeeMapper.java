@@ -45,9 +45,9 @@ public interface EmployeeMapper {
 
     /**
      *
-     * @param employeeDTO
+     * @param employee
      */
-    void update(EmployeeDTO employeeDTO);
+    void update(Employee employee);
 
     /**
      *
